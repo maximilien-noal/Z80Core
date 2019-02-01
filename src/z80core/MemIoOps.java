@@ -12,7 +12,7 @@ package z80core;
 public class MemIoOps {
     private byte z80Ram[] = null;
     private byte z80Ports[] = null;
-    private long tstates = 0;
+    protected long tstates = 0;
 
     public MemIoOps() {
         z80Ram = new byte[0x10000];

@@ -8,6 +8,7 @@
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import z80core.MemIoOps;
@@ -62,7 +63,9 @@ public class Z80Exerciser implements NotifyOps {
     }
 
     private void runTest(String testName) {
-        try (BufferedInputStream in = new BufferedInputStream( new FileInputStream(testName) )) {
+
+        try (   InputStream is = Z80Exerciser.class.getResourceAsStream(testName);
+                BufferedInputStream in = new BufferedInputStream(is)) {
             int count = in.read(z80Ram, 0x100, 0xFF00);
             System.out.println("Readed " + count + " bytes from " + testName);
         } catch (IOException ex) {
