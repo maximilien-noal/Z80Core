@@ -1,5 +1,7 @@
 # Z80Core
-#### A Z80 core written in Java.
+#### A Z80 core originally written in Java, ported to C#.
+
+Original code by @jsanchezv
 
 This core is a slightly modified core extracted from [JSpeccy](https://github.com/jsanchezv/JSpeccy), ready to be used at any emulator that needs a Z80 CPU.
 
