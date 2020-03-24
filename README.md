@@ -1,5 +1,5 @@
 # Z80Core
-#### A Z80 core originally written in Java, ported to C#.
+#### A Z80 core originally written in Java, ported to C# (.NET Standard 2.0)
 
 Original code by @jsanchezv
 
