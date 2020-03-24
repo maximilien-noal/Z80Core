@@ -87,7 +87,7 @@ namespace Z80core
         public virtual void Poke16(int address, int word)
         {
             Poke8(address, word);
-            Poke8(address + 1, word >> 8);
+            Poke8(address + 1, (int)((uint)word >> 8));
         }
 
         public virtual void Poke8(int address, int value)

@@ -293,13 +293,13 @@ namespace Z80core
 
         public void SetRegAF(int word)
         {
-            regA = (word >> 8) & 0xff;
+            regA = ((int)(uint)word >> 8) & 0xff;
             regF = word & 0xff;
         }
 
         public void SetRegAFx(int word)
         {
-            regAx = (word >> 8) & 0xff;
+            regAx = ((int)(uint)word >> 8) & 0xff;
             regFx = word & 0xff;
         }
 
@@ -315,13 +315,13 @@ namespace Z80core
 
         public void SetRegBC(int word)
         {
-            regB = (word >> 8) & 0xff;
+            regB = ((int)(uint)word >> 8) & 0xff;
             regC = word & 0xff;
         }
 
         public void SetRegBCx(int word)
         {
-            regBx = (word >> 8) & 0xff;
+            regBx = ((int)(uint)word >> 8) & 0xff;
             regCx = word & 0xff;
         }
 
@@ -347,13 +347,13 @@ namespace Z80core
 
         public void SetRegDE(int word)
         {
-            regD = (word >> 8) & 0xff;
+            regD = ((int)(uint)word >> 8) & 0xff;
             regE = word & 0xff;
         }
 
         public void SetRegDEx(int word)
         {
-            regDx = (word >> 8) & 0xff;
+            regDx = ((int)(uint)word >> 8) & 0xff;
             regEx = word & 0xff;
         }
 
@@ -389,13 +389,13 @@ namespace Z80core
 
         public void SetRegHL(int word)
         {
-            regH = (word >> 8) & 0xff;
+            regH = ((int)(uint)word >> 8) & 0xff;
             regL = word & 0xff;
         }
 
         public void SetRegHLx(int word)
         {
-            regHx = (word >> 8) & 0xff;
+            regHx = ((int)(uint)word >> 8) & 0xff;
             regLx = word & 0xff;
         }
 

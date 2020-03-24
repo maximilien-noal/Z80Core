@@ -676,14 +676,14 @@ namespace Z80core
 
         public void SetRegAF(int word)
         {
-            regA = (word >> 8) & 0xff;
+            regA = ((int)(uint)word >> 8) & 0xff;
             sz5h3pnFlags = word & 0xfe;
             carryFlag = (word & CARRY_MASK) != 0;
         }
 
         public void SetRegAFx(int word)
         {
-            regAx = (word >> 8) & 0xff;
+            regAx = ((int)(uint)word >> 8) & 0xff;
             regFx = word & 0xff;
         }
 
@@ -699,13 +699,13 @@ namespace Z80core
 
         public void SetRegBC(int word)
         {
-            regB = (word >> 8) & 0xff;
+            regB = ((int)(uint)word >> 8) & 0xff;
             regC = word & 0xff;
         }
 
         public void SetRegBCx(int word)
         {
-            regBx = (word >> 8) & 0xff;
+            regBx = ((int)(uint)word >> 8) & 0xff;
             regCx = word & 0xff;
         }
 
@@ -731,13 +731,13 @@ namespace Z80core
 
         public void SetRegDE(int word)
         {
-            regD = (word >> 8) & 0xff;
+            regD = ((int)(uint)word >> 8) & 0xff;
             regE = word & 0xff;
         }
 
         public void SetRegDEx(int word)
         {
-            regDx = (word >> 8) & 0xff;
+            regDx = ((int)(uint)word >> 8) & 0xff;
             regEx = word & 0xff;
         }
 
@@ -768,13 +768,13 @@ namespace Z80core
 
         public void SetRegHL(int word)
         {
-            regH = (word >> 8) & 0xff;
+            regH = ((int)(uint)word >> 8) & 0xff;
             regL = word & 0xff;
         }
 
         public void SetRegHLx(int word)
         {
-            regHx = (word >> 8) & 0xff;
+            regHx = ((int)(uint)word >> 8) & 0xff;
             regLx = word & 0xff;
         }
 
@@ -970,7 +970,7 @@ namespace Z80core
         {
             oper16 += reg16;
             carryFlag = oper16 > 0xffff;
-            sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZP_MASK) | ((oper16 >> 8) & FLAG_53_MASK);
+            sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZP_MASK) | (((int)(uint)oper16 >> 8) & FLAG_53_MASK);
             oper16 &= 0xffff;
             if ((oper16 & 0x0fff) < (reg16 & 0x0fff))
             {
@@ -1622,7 +1622,7 @@ namespace Z80core
                     {
                         int work16 = GetRegHL();
                         Bit(0x01, MemIoImpl.Peek8(work16));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((memptr >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)memptr >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(work16, 1);
                         break;
                     }
@@ -1673,7 +1673,7 @@ namespace Z80core
                     {
                         int work16 = GetRegHL();
                         Bit(0x02, MemIoImpl.Peek8(work16));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((memptr >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)memptr >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(work16, 1);
                         break;
                     }
@@ -1724,7 +1724,7 @@ namespace Z80core
                     {
                         int work16 = GetRegHL();
                         Bit(0x04, MemIoImpl.Peek8(work16));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((memptr >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)memptr >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(work16, 1);
                         break;
                     }
@@ -1775,7 +1775,7 @@ namespace Z80core
                     {
                         int work16 = GetRegHL();
                         Bit(0x08, MemIoImpl.Peek8(work16));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((memptr >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)memptr >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(work16, 1);
                         break;
                     }
@@ -1826,7 +1826,7 @@ namespace Z80core
                     {
                         int work16 = GetRegHL();
                         Bit(0x10, MemIoImpl.Peek8(work16));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((memptr >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)memptr >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(work16, 1);
                         break;
                     }
@@ -1877,7 +1877,7 @@ namespace Z80core
                     {
                         int work16 = GetRegHL();
                         Bit(0x20, MemIoImpl.Peek8(work16));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((memptr >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)memptr >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(work16, 1);
                         break;
                     }
@@ -1928,7 +1928,7 @@ namespace Z80core
                     {
                         int work16 = GetRegHL();
                         Bit(0x40, MemIoImpl.Peek8(work16));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((memptr >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)memptr >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(work16, 1);
                         break;
                     }
@@ -1979,7 +1979,7 @@ namespace Z80core
                     {
                         int work16 = GetRegHL();
                         Bit(0x80, MemIoImpl.Peek8(work16));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((memptr >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)memptr >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(work16, 1);
                         break;
                     }
@@ -2855,13 +2855,13 @@ namespace Z80core
 
                 case 0x24:
                     {
-                        regIXY = (Inc8(regIXY >> 8) << 8) | (regIXY & 0xff);
+                        regIXY = (Inc8((int)((uint)regIXY >> 8)) << 8) | (regIXY & 0xff);
                         break;
                     }
 
                 case 0x25:
                     {
-                        regIXY = (Dec8(regIXY >> 8) << 8) | (regIXY & 0xff);
+                        regIXY = (Dec8((int)((uint)regIXY >> 8)) << 8) | (regIXY & 0xff);
                         break;
                     }
 
@@ -2955,7 +2955,7 @@ namespace Z80core
 
                 case 0x44:
                     {
-                        regB = regIXY >> 8;
+                        regB = (int)((uint)regIXY >> 8);
                         break;
                     }
 
@@ -2976,7 +2976,7 @@ namespace Z80core
 
                 case 0x4C:
                     {
-                        regC = regIXY >> 8;
+                        regC = (int)((uint)regIXY >> 8);
                         break;
                     }
 
@@ -2997,7 +2997,7 @@ namespace Z80core
 
                 case 0x54:
                     {
-                        regD = regIXY >> 8;
+                        regD = (int)((uint)regIXY >> 8);
                         break;
                     }
 
@@ -3018,7 +3018,7 @@ namespace Z80core
 
                 case 0x5C:
                     {
-                        regE = regIXY >> 8;
+                        regE = (int)((uint)regIXY >> 8);
                         break;
                     }
 
@@ -3113,7 +3113,7 @@ namespace Z80core
 
                 case 0x6C:
                     {
-                        regIXY = (regIXY & 0xff00) | (regIXY >> 8);
+                        regIXY = (regIXY & 0xff00) | ((int)((uint)regIXY >> 8));
                         break;
                     }
 
@@ -3202,7 +3202,7 @@ namespace Z80core
 
                 case 0x7C:
                     {
-                        regA = regIXY >> 8;
+                        regA = (int)((uint)regIXY >> 8);
                         break;
                     }
 
@@ -3223,7 +3223,7 @@ namespace Z80core
 
                 case 0x84:
                     {
-                        Add(regIXY >> 8);
+                        Add((int)((uint)regIXY >> 8));
                         break;
                     }
 
@@ -3244,7 +3244,7 @@ namespace Z80core
 
                 case 0x8C:
                     {
-                        Adc(regIXY >> 8);
+                        Adc((int)((uint)regIXY >> 8));
                         break;
                     }
 
@@ -3265,7 +3265,7 @@ namespace Z80core
 
                 case 0x94:
                     {
-                        Sub(regIXY >> 8);
+                        Sub((int)((uint)regIXY >> 8));
                         break;
                     }
 
@@ -3286,7 +3286,7 @@ namespace Z80core
 
                 case 0x9C:
                     {
-                        Sbc(regIXY >> 8);
+                        Sbc((int)((uint)regIXY >> 8));
                         break;
                     }
 
@@ -3307,7 +3307,7 @@ namespace Z80core
 
                 case 0xA4:
                     {
-                        And(regIXY >> 8);
+                        And((int)((uint)regIXY >> 8));
                         break;
                     }
 
@@ -3328,7 +3328,7 @@ namespace Z80core
 
                 case 0xAC:
                     {
-                        Xor(regIXY >> 8);
+                        Xor((int)((uint)regIXY >> 8));
                         break;
                     }
 
@@ -3349,7 +3349,7 @@ namespace Z80core
 
                 case 0xB4:
                     {
-                        Or(regIXY >> 8);
+                        Or((int)((uint)regIXY >> 8));
                         break;
                     }
 
@@ -3370,7 +3370,7 @@ namespace Z80core
 
                 case 0xBC:
                     {
-                        Cp(regIXY >> 8);
+                        Cp((int)((uint)regIXY >> 8));
                         break;
                     }
 
@@ -3417,7 +3417,7 @@ namespace Z80core
                         int work16 = regIXY;
                         regIXY = MemIoImpl.Peek16(regSP);
                         MemIoImpl.AddressOnBus((regSP + 1) & 0xffff, 1);
-                        MemIoImpl.Poke8((regSP + 1) & 0xffff, work16 >> 8);
+                        MemIoImpl.Poke8((regSP + 1) & 0xffff, (int)((uint)work16 >> 8));
                         MemIoImpl.Poke8(regSP, work16);
                         MemIoImpl.AddressOnBus(regSP, 2);
                         memptr = regIXY;
@@ -3613,7 +3613,7 @@ namespace Z80core
                 case 0x47:
                     {
                         Bit(0x01, MemIoImpl.Peek8(address));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((address >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)address >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(address, 1);
                         break;
                     }
@@ -3628,7 +3628,7 @@ namespace Z80core
                 case 0x4F:
                     {
                         Bit(0x02, MemIoImpl.Peek8(address));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((address >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)address >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(address, 1);
                         break;
                     }
@@ -3643,7 +3643,7 @@ namespace Z80core
                 case 0x57:
                     {
                         Bit(0x04, MemIoImpl.Peek8(address));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((address >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)address >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(address, 1);
                         break;
                     }
@@ -3658,7 +3658,7 @@ namespace Z80core
                 case 0x5F:
                     {
                         Bit(0x08, MemIoImpl.Peek8(address));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((address >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)address >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(address, 1);
                         break;
                     }
@@ -3673,7 +3673,7 @@ namespace Z80core
                 case 0x67:
                     {
                         Bit(0x10, MemIoImpl.Peek8(address));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((address >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)address >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(address, 1);
                         break;
                     }
@@ -3688,7 +3688,7 @@ namespace Z80core
                 case 0x6F:
                     {
                         Bit(0x20, MemIoImpl.Peek8(address));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((address >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)address >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(address, 1);
                         break;
                     }
@@ -3703,7 +3703,7 @@ namespace Z80core
                 case 0x77:
                     {
                         Bit(0x40, MemIoImpl.Peek8(address));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((address >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)address >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(address, 1);
                         break;
                     }
@@ -3718,7 +3718,7 @@ namespace Z80core
                 case 0x7F:
                     {
                         Bit(0x80, MemIoImpl.Peek8(address));
-                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | ((address >> 8) & FLAG_53_MASK);
+                        sz5h3pnFlags = (sz5h3pnFlags & FLAG_SZHP_MASK) | (((int)((uint)address >> 8)) & FLAG_53_MASK);
                         MemIoImpl.AddressOnBus(address, 1);
                         break;
                     }
@@ -4618,7 +4618,7 @@ namespace Z80core
                 case 0x0F:
                     {
                         carryFlag = (regA & CARRY_MASK) != 0;
-                        regA >>= 1;
+                        regA = (int)((uint)regA >> 1);
                         if (carryFlag)
                         {
                             regA |= SIGN_MASK;
@@ -4755,7 +4755,7 @@ namespace Z80core
                     {
                         bool oldCarry = carryFlag;
                         carryFlag = (regA & CARRY_MASK) != 0;
-                        regA >>= 1;
+                        regA = (int)((uint)regA >> 1);
                         if (oldCarry)
                         {
                             regA |= SIGN_MASK;
@@ -6687,7 +6687,7 @@ namespace Z80core
         private void Push(int word)
         {
             regSP = (regSP - 1) & 0xffff;
-            MemIoImpl.Poke8(regSP, word >> 8);
+            MemIoImpl.Poke8(regSP, (int)((uint)word >> 8));
             regSP = (regSP - 1) & 0xffff;
             MemIoImpl.Poke8(regSP, word);
         }
@@ -6726,7 +6726,7 @@ namespace Z80core
             int aux = regA & 0x0f;
             memptr = GetRegHL();
             int memHL = MemIoImpl.Peek8(memptr);
-            regA = (regA & 0xf0) | (memHL >> 4);
+            regA = (regA & 0xf0) | ((int)((uint)memHL >> 4));
             MemIoImpl.AddressOnBus(memptr, 4);
             MemIoImpl.Poke8(memptr, ((memHL << 4) | aux) & 0xff);
             sz5h3pnFlags = sz53pn_addTable[regA];
@@ -6738,7 +6738,7 @@ namespace Z80core
         {
             bool carry = carryFlag;
             carryFlag = (oper8 & CARRY_MASK) != 0;
-            oper8 >>= 1;
+            oper8 = (int)((uint)oper8 >> 1);
             if (carry)
             {
                 oper8 |= SIGN_MASK;
@@ -6752,7 +6752,7 @@ namespace Z80core
         private int Rrc(int oper8)
         {
             carryFlag = (oper8 & CARRY_MASK) != 0;
-            oper8 >>= 1;
+            oper8 = (int)((uint)oper8 >> 1);
             if (carryFlag)
             {
                 oper8 |= SIGN_MASK;
@@ -6770,7 +6770,7 @@ namespace Z80core
             int memHL = MemIoImpl.Peek8(memptr);
             regA = (regA & 0xf0) | (memHL & 0x0f);
             MemIoImpl.AddressOnBus(memptr, 4);
-            MemIoImpl.Poke8(memptr, (memHL >> 4) | aux);
+            MemIoImpl.Poke8(memptr, ((int)((uint)memHL >> 4)) | aux);
             sz5h3pnFlags = sz53pn_addTable[regA];
             memptr++;
             flagQ = true;
@@ -6864,7 +6864,7 @@ namespace Z80core
         private int Srl(int oper8)
         {
             carryFlag = (oper8 & CARRY_MASK) != 0;
-            oper8 >>= 1;
+            oper8 = (int)((uint)oper8 >> 1);
             sz5h3pnFlags = sz53pn_addTable[oper8];
             flagQ = true;
             return oper8;
