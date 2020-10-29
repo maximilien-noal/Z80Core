@@ -6,15 +6,9 @@ namespace Z80core
     {
         private long tstates = 0;
 
-        private byte[] z80Ports = null;
+        private byte[] z80Ports = new byte[0x10000];
 
-        private byte[] z80Ram = null;
-
-        public MemIoOps()
-        {
-            z80Ram = new byte[0x10000];
-            z80Ports = new byte[0x10000];
-        }
+        private byte[] z80Ram = new byte[0x10000];
 
         public MemIoOps(int ramSize, int portSize)
         {
