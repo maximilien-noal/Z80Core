@@ -8,17 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="test\zexall.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="test\zexall.z80">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="test\zexdoc.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="test\zexdoc.z80">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Compile Remove="TestApp\**" />
+    <EmbeddedResource Remove="TestApp\**" />
+    <None Remove="TestApp\**" />
   </ItemGroup>
 </Project>
