@@ -2,7 +2,7 @@ using System;
 
 namespace Z80core
 {
-    public class MemIoOps
+    public class MemIoOps : IMemIoOps
     {
         private long tstates = 0;
 
@@ -99,6 +99,11 @@ namespace Z80core
         public virtual void Reset()
         {
             tstates = 0;
+        }
+
+        public bool SetActiveINT(bool val)
+        {
+            return false;
         }
 
         public virtual void SetPorts(byte[] ports)

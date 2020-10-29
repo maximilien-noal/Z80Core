@@ -42,8 +42,6 @@ namespace Z80core
 
         private readonly bool[] breakpointAt = new bool[65536];
 
-        private bool activeINT = false;
-
         private bool activeNMI = false;
 
         private bool carryFlag;
@@ -58,7 +56,7 @@ namespace Z80core
 
         private bool halted = false;
 
-        private MemIoOps MemIoImpl;
+        private IMemIoOps MemIoImpl;
 
         private int memptr;
 
@@ -135,7 +133,7 @@ namespace Z80core
             sz53pn_subTable[0] |= ZERO_MASK;
         }
 
-        public Z80(MemIoOps memory, INotifyOps notify)
+        public Z80(IMemIoOps memory, INotifyOps notify)
         {
             MemIoImpl = memory;
             NotifyImpl = notify;
@@ -405,7 +403,7 @@ namespace Z80core
             state.SetIFF1(ffIFF1);
             state.SetIFF2(ffIFF2);
             state.SetIM(modeINT);
-            state.SetINTLine(activeINT);
+            state.SetINTLine(MemIoImpl.IsActiveINT());
             state.SetPendingEI(pendingEI);
             state.SetNMI(activeNMI);
             state.SetFlagQ(lastFlagQ);
@@ -464,7 +462,7 @@ namespace Z80core
 
         public bool IsINTLine()
         {
-            return activeINT;
+            return MemIoImpl.IsActiveINT();
         }
 
         public bool IsNMI()
@@ -521,7 +519,7 @@ namespace Z80core
             ffIFF2 = false;
             pendingEI = false;
             activeNMI = false;
-            activeINT = false;
+            MemIoImpl.SetActiveINT(false);
             halted = false;
             SetIM(IntMode.IM0);
             lastFlagQ = false;
@@ -622,12 +620,12 @@ namespace Z80core
             modeINT = mode;
         }
 
-        public void SetINTLine(bool intLine)
+        public bool SetINTLine(bool intLine)
         {
-            activeINT = intLine;
+            return MemIoImpl.SetActiveINT(intLine);
         }
 
-        public virtual void SetMemIoHandler(MemIoOps memIo)
+        public virtual void SetMemIoHandler(IMemIoOps memIo)
         {
             MemIoImpl = memIo;
         }
@@ -865,7 +863,7 @@ namespace Z80core
             ffIFF1 = state.IsIFF1();
             ffIFF2 = state.IsIFF2();
             modeINT = state.GetIM();
-            activeINT = state.IsINTLine();
+            MemIoImpl.SetActiveINT(state.IsINTLine());
             pendingEI = state.IsPendingEI();
             activeNMI = state.IsNMI();
             flagQ = false;
